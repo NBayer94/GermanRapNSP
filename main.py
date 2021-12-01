@@ -6,7 +6,7 @@ import config
 ######
 #Data#
 ######
-lyrics = data.load_data('lyrics_raw.pkl', raw=False)
+lyrics = data.load_data(config.data_path, raw=False)
 
 char_to_ind, ind_to_char = data.get_dicts(lyrics)
 
@@ -32,10 +32,12 @@ dataset = train.create_train_batches(dataset)
 embed_dim = config.hyperparameters['embed_dim']
 rnn_neurons = config.hyperparameters['rnn_neurons']
 batch_size = config.hyperparameters['batch_size']
+rnn_layers = config.hyperparameters['rnn_layers']
+dropout = config.hyperparameters['dropout']
 
-model = model.create_model(vocab_size, embed_dim, rnn_neurons, batch_size)
+model = model.create_model(vocab_size, embed_dim, rnn_neurons, batch_size, rnn_layers, dropout)
 
 train.train_model(model, dataset)
 
-train.save_model(model, 'model_gru.h5')
+train.save_model(model, 'model.h5')
 

@@ -13,13 +13,18 @@ def preprocess(lyrics):
         lyrics_complete = lyrics_complete + lyric
 
     # transform to lower case
-    lyrics_complete = lyrics_complete.lower()
+    #lyrics_complete = lyrics_complete.lower()
 
     # Replace unneccessary chars
     str_to_replace = ['\u2005', '\u200b', '–', '—', '‘', '’', '‚', '“', '”', '„', '•', '…', '′', '″', '−', '\ufeff', '«',
     '\xad', '´', '»', '%', '&', "'", '(', ')', '*', '+', '\n', ':', ';', '[', '\u205f', '/', '-', '_', '"', '#', '€', '$',
     '¡', 'ê', 'ð', 'ó', 'ú', 'ī', 'ş', 'а', 'б', 'г', 'д', 'и', 'й', 'к', 'л', 'м', 'о', 'р', 'с', 'у', 'ь', 'я']
 
+    for repl in str_to_replace:
+        lyrics_complete = lyrics_complete.replace(repl, ' ')
+
+    # Replace multiple blank spaces
+    str_to_replace = ['    ', '   ', '  ']
     for repl in str_to_replace:
         lyrics_complete = lyrics_complete.replace(repl, ' ')
 
